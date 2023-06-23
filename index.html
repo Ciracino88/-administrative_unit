@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+    <title>JS 게시판</title>
+</head>
+<body>
+	<script>
+		load_json();
+		
+		// 게시글 데이터 버퍼
+		let table = new Array();
+		// 총 게시글 수
+		let total_num = 0;
+		// 한 페이지에 출력되는 게시글 수
+		let page_max_feed = 20;
+		// 현재 페이지
+		let cur_page = 1;
+		
+		function load_json() {
+    		fetch('feed_db.json').then(res => {
+        		return res.json();
+    		}).then(data => set_table(data));
+		}
+		
+		function set_table(t) {
+			// 게시물 번호 설정
+			total_num = t.length;
+			
+			// json 데이터를 받아서 객체로 만들고 table 버퍼에 담기
+			for (let i = 0; i < t.length; i++) {
+				target = t[i];
+				table[i] = {
+					number : i + 1,
+					title : target['title'],
+					content : target['content'],
+					admin : target['admin'],
+					upload_date : target['upload_date'],
+					view_cnt : target['view_cnt'],
+					like : target['like']
+				}
+			}
+			
+			post_feed(cur_page);
+		}
+		
+		// 게시글 출력하기, 매개변수로는 현재 페이지 번호
+		function post_feed(cur_page_num) {
+			// 화면 초기화
+			let post_list = document.querySelectorAll(".data_row");
+			post_list.forEach(function(item) {
+				item.remove();
+			})
+			
+			// 게시글 출력 공간
+			let feed_board = document.querySelector(".feed_board");
+			
+			// 첫 게시글 페이지 번호 설정
+			console.log(total_num);
+			let start_num = total_num - page_max_feed * (cur_page_num - 1);
+			for (let j = start_num - 1; j >= start_num - page_max_feed && j >= 0; j--) {
+				// 버퍼에서 데이터를 가져와서 부여하기
+				// 피드 객체 생성
+				let feed = document.createElement("ul");
+				feed.className = "feed";
+				feed.className = "data_row";
+				
+				// 요소별로 부여할 클래스명 리스트
+				let classname_list = ["feed_number", "feed_title", "feed_admin", "width_set_100", "width_set_100", "width_set_100"];
+				
+				// 반복문으로 삽입하기 편하게 리스트로 데이터 담아놓기
+				let feed_data = [table[j]['number'], table[j]['title'], table[j]['admin'], table[j]['upload_date'], table[j]['view_cnt'], table[j]['like']];
+				
+				// 게시글 생성
+				for (let k = 0; k < classname_list.length; k++) {
+					let list = document.createElement("li");
+					list.className = classname_list[k];
+					list.textContent = feed_data[k];
+					feed.appendChild(list);
+				}
+				
+				// 게시판에 게시글 추가
+				feed_board.appendChild(feed);
+				}
+			}
+	</script>
+    <div class="container">
+		<!-- 상단 네비바 -->
+		<div>
+			<ul class="top_navbar">
+				<li class="logo">암암리 게시판</li>
+				<li id="top_navbar_user_nickname" class="top_navbar_user_nickname">닉네임</li>
+			</ul>
+		</div>
+        <!-- 게시글 블록 -->
+        <div class="feed_board">
+            <ul class="feed">
+                <li class="feed_number">번호</li>
+                <li class="feed_title">제목</li>
+                <li class="feed_admin">작성자</li>
+                <li class="feed_upload_date width_set_100">작성일</li>
+                <li class="feed_view_cnt width_set_100">조회수</li>
+                <li class="feed_like width_set_100">좋아요</li>
+            </ul>
+        </div>
+        <!-- 페이지 블럭 -->
+        <div>
+            <button>before</button>
+            <div>
+                <!-- 페이지 삽입 -->
+            </div>
+            <button>next</button>
+        </div>
+    </div>
+</body>
+</html>
