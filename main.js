@@ -21,8 +21,9 @@ function check_account(t) {
         input_pw = document.getElementById('pw');
 
         if (target_id == input_id.value) {
-			console.log("아이디 일치");
+            console.log(target_pw, input_pw.value);
             if (target_pw == input_pw.value) {
+                localStorage.setItem('user_name', s[2]);
                 location.replace("index.html");
 				return;
             }

@@ -8,6 +8,12 @@
     <title>JS 게시판</title>
 </head>
 <body>
+    <script>
+		window.onload = function() {
+			const a = document.getElementById('top_navbar_user_nickname');
+			a.innerText = localStorage.getItem('user_name');
+		}
+	</script>
 	<script>
 		load_json();
 		
