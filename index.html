@@ -71,7 +71,6 @@
 				// 버퍼에서 데이터를 가져와서 부여하기
 				// 피드 객체 생성
 				let feed = document.createElement("ul");
-				feed.className = "feed";
 				feed.className = "data_row";
 				
 				// 요소별로 부여할 클래스명 리스트
@@ -84,8 +83,18 @@
 				for (let k = 0; k < classname_list.length; k++) {
 					let list = document.createElement("li");
 					list.className = classname_list[k];
-					list.textContent = feed_data[k];
-					feed.appendChild(list);
+					if (k == 1) {
+						let to_content = document.createElement("a");
+						to_content.textContent = feed_data[k];
+						to_content.href = "#";
+						list.appendChild(to_content);
+						feed.appendChild(list);
+					}
+
+					else {
+						list.textContent = feed_data[k];
+						feed.appendChild(list);
+					}
 				}
 				
 				// 게시판에 게시글 추가
@@ -95,12 +104,23 @@
 	</script>
     <div class="container">
 		<!-- 상단 네비바 -->
-		<div>
+		<nav>
 			<ul class="top_navbar">
-				<li class="logo">암암리 게시판</li>
+				<li class="top_navbar_item">
+					<a href="#">암암리 게시판</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">글쓰기</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">글쓰기2</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">글쓰기3</a>
+				</li>
 				<li id="top_navbar_user_nickname" class="top_navbar_user_nickname">닉네임</li>
 			</ul>
-		</div>
+		</nav>
         <!-- 게시글 블록 -->
         <div class="feed_board">
             <ul class="feed">

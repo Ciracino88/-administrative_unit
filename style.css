@@ -4,9 +4,19 @@ ul {
     display: inline-block;
 }
 
+/* 여백을 없애서 네비바가 바짝 붙게만듬 */
+body {
+    margin: 0;
+}
+
 .feed {
-    width: 1000px;
+    width: 100%;
     border-bottom: solid 1px gray;
+}
+
+.data_row {
+    width: 100%;
+    border-bottom: 1px black;
 }
 
 li {
@@ -19,23 +29,26 @@ li {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.feed_board {
+    margin-top: 60px;
 }
 
 .feed_number {
-    width: 70px;
+    width: 5%;
 }
 
 .feed_title {
-    width: 500px;
+    width: 55%;
 }
 
 .feed_admin {
-    width: 120px;
+    width: 12.5%;
 }
 
 .width_set_100 {
-    width: 100px;
+    width: 9%;
 }
 
 .feed > li {
@@ -72,20 +85,36 @@ li {
 }
 
 /* 상단 네비바 */
-.top_navbar > li {
-    border-bottom: none;
+.top_navbar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    position: fixed;
 }
 
-.logo {
-    position: relative;
-    right: 400px;
-    font-weight: bold;
-    font-size: 25px;
+.top_navbar_item {
+    padding: 15px;
+    cursor: pointer;
 }
 
-.top_navbar_user_nickname {
-    position: relative;
-    top: 5px;
-    left: 400px;
+.top_navbar_item:hover {
+    background-color: gray;
+}
+
+.top_navbar_item > a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
     font-weight: bold;
+}
+
+.top_navbar_item:nth-child(1) {
+    margin-right: 150px;
+}
+
+.top_navbar_item:nth-child(1) > a {
+    color: yellow;
 }
