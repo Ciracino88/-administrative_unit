@@ -11,12 +11,58 @@
     <script>
 		window.onload = function() {
 			const a = document.getElementById('top_navbar_user_nickname');
-			a.innerText = localStorage.getItem('user_name');
+			data = localStorage.getItem('thisuser');
+			a.innerText = data;
 		}
 	</script>
+    <div class="container">
+		<!-- 상단 네비바 -->
+		<nav>
+			<ul class="top_navbar">
+				<li class="top_navbar_item">
+					<a href="index.html">행정반</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="write.html">글쓰기</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">README</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">DM</a>
+				</li>
+				<li id="top_navbar_user_nickname" class="top_navbar_item">
+					<a href="#">닉네임</a>
+				</li>
+			</ul>
+		</nav>
+        <!-- 게시글 블록 -->
+        <div class="feed_board">
+            <ul class="feed">
+                <li class="feed_number">번호</li>
+                <li class="feed_title">제목</li>
+                <li class="feed_admin">작성자</li>
+                <li class="feed_upload_date width_set_100">작성일</li>
+                <li class="feed_view_cnt width_set_100">조회수</li>
+                <li class="feed_like width_set_100">좋아요</li>
+            </ul>
+        </div>
+        <!-- 페이지 블럭 -->
+        <div>
+            <button>before</button>
+            <div>
+                <!-- 페이지 삽입 -->
+            </div>
+            <button>next</button>
+        </div>
+    </div>
 	<script>
-		load_json();
-		
+		// feed_list 존재 여부 확인
+		init_feed_list();
+
+		data = localStorage.getItem('feed_list');
+		d = JSON.parse(data);
+
 		// 게시글 데이터 버퍼
 		let table = new Array();
 		// 총 게시글 수
@@ -25,18 +71,14 @@
 		let page_max_feed = 20;
 		// 현재 페이지
 		let cur_page = 1;
-		
-		function load_json() {
-    		fetch('feed_db.json').then(res => {
-        		return res.json();
-    		}).then(data => set_table(data));
-		}
+
+		set_table(d);
 		
 		function set_table(t) {
 			// 게시물 번호 설정
 			total_num = t.length;
 			
-			// json 데이터를 받아서 객체로 만들고 table 버퍼에 담기
+			// json 데이터를 받아서 객체로  jsonData.name); 
 			for (let i = 0; i < t.length; i++) {
 				target = t[i];
 				table[i] = {
@@ -101,45 +143,24 @@
 				feed_board.appendChild(feed);
 				}
 			}
+
+			function init_feed_list() {
+				if (localStorage.getItem('feed_list') === null) {
+					list = [];
+					dummy = {
+						'title' : 'dummy',
+						'content' : 'dummy data',
+						'admin' : 'admin',
+						'upload_date' : '2023.0.0_0:0',
+						'view_cnt' : '0',
+						'like' : '0'
+					};
+					list.push(dummy);
+					d = JSON.stringify(list);
+					localStorage.setItem('feed_list', d);
+					alert('update dummy data');
+				}
+			}
 	</script>
-    <div class="container">
-		<!-- 상단 네비바 -->
-		<nav>
-			<ul class="top_navbar">
-				<li class="top_navbar_item">
-					<a href="#">암암리 게시판</a>
-				</li>
-				<li class="top_navbar_item">
-					<a href="#">글쓰기</a>
-				</li>
-				<li class="top_navbar_item">
-					<a href="#">글쓰기2</a>
-				</li>
-				<li class="top_navbar_item">
-					<a href="#">글쓰기3</a>
-				</li>
-				<li id="top_navbar_user_nickname" class="top_navbar_user_nickname">닉네임</li>
-			</ul>
-		</nav>
-        <!-- 게시글 블록 -->
-        <div class="feed_board">
-            <ul class="feed">
-                <li class="feed_number">번호</li>
-                <li class="feed_title">제목</li>
-                <li class="feed_admin">작성자</li>
-                <li class="feed_upload_date width_set_100">작성일</li>
-                <li class="feed_view_cnt width_set_100">조회수</li>
-                <li class="feed_like width_set_100">좋아요</li>
-            </ul>
-        </div>
-        <!-- 페이지 블럭 -->
-        <div>
-            <button>before</button>
-            <div>
-                <!-- 페이지 삽입 -->
-            </div>
-            <button>next</button>
-        </div>
-    </div>
 </body>
 </html>

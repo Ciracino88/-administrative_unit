@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+    <title>글쓰기</title>
+</head>
+<body>
+    <script>
+		window.onload = function() {
+			const a = document.getElementById('top_navbar_user_nickname');
+			data = localStorage.getItem('thisuser');
+			a.innerText = data;
+		}
+	</script>
+	<script>
+		function upload_feed() {
+			let write_title_data = document.getElementById('write_title').value;
+			let write_content_data = document.getElementById('write_content').value;
+			let writer = localStorage.getItem('thisuser');
+
+			// 업로드 날짜 설정
+			const date = new Date();
+
+			const yy = date.getFullYear();
+			const mm = date.getMonth() + 1;
+			const dd = date.getDate();
+			const hh = date.getHours();
+			const mn = date.getMinutes();
+			
+			let writing_upload_date = (yy + '-' + mm + '-' + dd + '_' + hh + ':' + mn);
+
+			// DB에 올릴 피드 데이터 객체 생성
+			data = {
+				title : write_title_data,
+				content : write_content_data,
+				admin : writer,
+				upload_date : writing_upload_date,
+				view_cnt : '0',
+				like : '0'
+			}
+			
+			// data upload
+			var fl = localStorage.getItem('feed_list');
+			od = JSON.parse(fl);
+
+			od.push(data);
+			d = JSON.stringify(od);
+			console.log(d);
+			localStorage.setItem('feed_list', d);
+
+		}
+	</script>
+    <div class="container">
+		<!-- 상단 네비바 -->
+		<nav>
+			<ul class="top_navbar">
+				<li class="top_navbar_item">
+					<a href="index.html">행정반</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="write.html">글쓰기</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">README</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">DM</a>
+				</li>
+				<li id="top_navbar_user_nickname" class="top_navbar_item">
+                    <a href="#">닉네임</a>
+                </li>
+			</ul>
+		</nav>
+		<!-- 최대 입력 3200자 -->
+        <div class="write_box">
+            <div>
+                <input id="write_title" type="text" placeholder="제목을 입력해주세요" maxlength="40">
+            </div>
+            <div>
+                <textarea id="write_content" maxlength="2000"></textarea>
+            </div>
+            <button id="upload_feed" class="upload_feed_btn" onclick="upload_feed()">글쓰기</button>
+        </div>
+    </div>
+</body>
+</html>
