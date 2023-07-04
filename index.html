@@ -107,7 +107,6 @@
 			let feed_board = document.querySelector(".feed_board");
 			
 			// 첫 게시글 페이지 번호 설정
-			console.log(total_num);
 			let start_num = total_num - page_max_feed * (cur_page_num - 1);
 			for (let j = start_num - 1; j >= start_num - page_max_feed && j >= 0; j--) {
 				// 버퍼에서 데이터를 가져와서 부여하기
@@ -129,6 +128,10 @@
 						let to_content = document.createElement("a");
 						to_content.textContent = feed_data[k];
 						to_content.href = "#";
+						to_content.addEventListener('click', () => {
+							// 선택한 글의 인덱스 번호를 넘김
+							load_data(to_content.parentNode.previousSibling.innerText);
+						});
 						list.appendChild(to_content);
 						feed.appendChild(list);
 					}
@@ -160,6 +163,12 @@
 					localStorage.setItem('feed_list', d);
 					alert('update dummy data');
 				}
+			}
+
+			// 게시글 페이지로 넘어가기
+			function load_data(t) {
+				// 부모 노드 출력
+				console.log(t);
 			}
 	</script>
 </body>
