@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+    <title>게시글</title>
+</head>
+<body>
+    <script>
+		window.onload = function() {
+			const a = document.getElementById('top_navbar_user_nickname');
+			data = localStorage.getItem('thisuser');
+			a.innerText = data;
+		}
+	</script>
+    <div class="container">
+		<!-- 상단 네비바 -->
+		<nav>
+			<ul class="top_navbar">
+				<li class="top_navbar_item">
+					<a href="index.html">행정반</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="write.html">글쓰기</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">README</a>
+				</li>
+				<li class="top_navbar_item">
+					<a href="#">DM</a>
+				</li>
+				<li id="top_navbar_user_nickname" class="top_navbar_item">
+                    <a href="#">닉네임</a>
+                </li>
+			</ul>
+		</nav>
+		<!-- 본문 구현 -->
+        <div class="content">
+			<div class="content_header">
+				<p id="content_header_title">제목이다 제목이야</p>
+				<p id="content_header_view_cnt">😶 100000</p>
+			</div>
+			<div class="content_middle">
+				<p id="content_middle_admin">😎 ciracino88</p>
+				<p id="content_middle_upload_date">🕒 2023.07.04_21:23</p>
+			</div>
+			<div id="content_main">
+				<p>I'm a mess, mess, mess, mess, mess, mess, mess
+					I'm a mess, mess, mess, mess, mess, mess, mess
+					I'm a mess in distress
+					But we're still the best dressed
+					Fearless, say yes, we don't dress to impress
+					괜찮단다 뭐를 해도
+					거짓말인 걸 난 알아
+					괜찮겠지 뭘 해도
+					착한 얼굴에 니 말 잘 들을 땐
+					괜찮지 않아 그런 건
+					내 룰은 나만 정할래 yeah
+					볼 거야 금지된 걸
+					Never hold back 더 자유롭게
+					Boom, boom, boom 내 심장이 뛰네
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (boom, boom now)
+					Boom, boom, boom 내 심장이 뛰네
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (push it)
+					I wish for what's forbidden
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (push it)
+					(Oh-oh) I wish for what's forbidden
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (oh-oh)
+					I'm a mess, mess, mess, mess, mess, mess, mess
+					I'm a mess, mess, mess, mess, mess, mess, mess
+					I'm a mess in distress
+					But we're still the best dressed
+					Fearless, say yes, we don't dress to impress
+					웃어, 웃어, 더 인형이 되렴 (ah-ah-ah)
+					덮어, 덮어, 다 감정 따윈 다
+					싫어, 싫어, 난 인형이 아냐 (ah-ah-ah)
+					찡그린대도 그것도 나야
+					보지 말람 보고 파
+					날 둘러싼 이 금기들 yeah
+					그날의 이브처럼
+					Take it on the chain, I know I like that
+					Boom, boom, boom 내 심장이 뛰네
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (boom, boom now)
+					Boom, boom, boom 내 심장이 뛰네
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (push it)
+					I wish for what's forbidden
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (push it)
+					(Oh-oh) I wish for what's forbidden
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (oh-oh)
+					What you waiting for?
+					이게 타락이면 we fall, fall, fall (oh-oh)
+					What you looking for?
+					원한다면 now we fall, we fall, we fall
+					Boom, boom, boom 내 심장이 뛰네
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (boom, boom now)
+					Boom, boom, boom 내 심장이 뛰네
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom (push it)
+					Girl wanna have fun (girl)
+					Girl wanna have fun (girl)
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom
+					Girl wanna have fun (girl)
+					Girl wanna have fun (girl)
+					Get it like boom, boom, boom
+					Get it like boom, boom, boom
+					</p>
+			</div>
+			<div id="content_bottom_like">
+				<span>💖 4</p>
+			</div>
+			<div class="content_bottom_comment">
+				<p>댓글 10</p>
+			</div>
+		</div>
+    </div>
+</body>
+</html>
